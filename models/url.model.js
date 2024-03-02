@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const urlSchema = new mongoose.Schema(
   {
-    shortId: {
+    shortID: {
       type: String,
       required: true,
       unique: true,
@@ -18,5 +18,5 @@ const urlSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-export const URL = mongoose.model("URL", urlSchema);
+const URL = mongoose.model("URL", urlSchema);
+module.exports = URL;
