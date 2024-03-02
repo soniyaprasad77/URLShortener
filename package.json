@@ -1,0 +1,24 @@
+{
+  "name": "urlshortner",
+  "version": "1.0.0",
+  "description": "a website which shortens your URL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "soniya prasad",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.2.0",
+    "nanoid": "^5.0.6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soniyaprasad77/URLShortener.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soniyaprasad77/URLShortener/issues"
+  },
+  "homepage": "https://github.com/soniyaprasad77/URLShortener#readme"
+}
