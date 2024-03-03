@@ -5,14 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URL Shortener</title>
     <style>
-      h1 {
+      body {
+        background-color: #f5f5dc; /* Light pink background color */
+        margin: 0;
+        padding: 0;
         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333; /* Dark text color */
+        margin-top: 50px; /* Adjust margin as needed */
+      }
+
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Vertical stacking of form and table */
+      }
+
+      form {
+        background-color: #fff; /* White form background */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+        width: 800px;
+        text-align: center;
+        margin-bottom: 20px; /* Add space between form and table */
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #555; /* Darker label text color */
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ddd; /* Light border color */
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #4caf50; /* Green button color */
+        color: #fff; /* White button text color */
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049; /* Darker green on hover */
+      }
+
+      p {
+        margin-top: 15px;
+        color: #333; /* Dark paragraph text color */
+      }
+
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px; /* Add space between form and table */
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
       }
     </style>
   </head>
   <body>
     <h1>URL SHORTENER</h1>
-  
+    <div id="container">
+      <form method="POST" action="/url">
+        <label>Enter your original URL</label>
+        <input type="text" placeholder="https://example.com" name="url" />
+        <button type="submit">Generate</button>
+        <br />
+        <% if (locals.id) { %>
+        <p>URL Generated: http://localhost:8001/url/<%- id %></p>
+        <% } %>
+      </form>
+
+      <% if (locals.urls) { %>
+      <table>
+        <thead>
+          <th>S. No</th>
+          <th>ShortID</th>
+          <th>Redirect</th>
+          <th>Total Clicks</th>
+        </thead>
+        <tbody>
+          <% urls.forEach((url, index)=> { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= url.shortID %></td>
+            <td><%= url.redirectURL %></td>
+            <td><%= url.visitHistory.length %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
   </body>
 </html>
