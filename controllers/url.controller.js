@@ -12,7 +12,9 @@ const handleGetNewURLShortener = async (req, res) => {
     shortID: shortID,
     redirectURL: body.url,
     visitHistory: [],
+    createdBy: req.user._id,
   });
+  
   return res.render("home", { id: shortID });
 };
 
