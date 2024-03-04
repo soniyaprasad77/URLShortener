@@ -1,5 +1,4 @@
 const User = require("../models/user.model");
-const { v4: uuidv4 } = require('uuid');
 const {setUser} = require("../service/user.auth");
 const handleUserSignup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -18,9 +17,8 @@ const handleUserLogin = async (req, res) => {
       error: "Invalid Username or Password",
     });
   }
-  const sessionID  = uuidv4();
-  setUser(sessionID, user);
-  res.cookie("uid", sessionID);
+  const token = setUser(user);
+  res.cookie("uid", token);
   return res.redirect("/");
 };
 
