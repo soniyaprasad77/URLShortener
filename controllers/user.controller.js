@@ -1,5 +1,5 @@
 const User = require("../models/user.model");
-const {setUser} = require("../service/user.auth");
+const { setUser } = require("../service/user.auth");
 const handleUserSignup = async (req, res) => {
   const { name, email, password } = req.body;
   await User.create({
@@ -7,22 +7,23 @@ const handleUserSignup = async (req, res) => {
     email,
     password,
   });
- return res.redirect("/");
+  return res.redirect("/");
 };
 const handleUserLogin = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email, password });
   if (!user) {
-    return  res.render("login", {
+    return res.render("login", {
       error: "Invalid Username or Password",
     });
   }
   const token = setUser(user);
-  res.cookie("uid", token);
-  return res.redirect("/");
+  //res.cookie("uid", token);
+  //return res.redirect("/");
+  return res.json({ token });
 };
 
 module.exports = {
   handleUserSignup,
-  handleUserLogin
+  handleUserLogin,
 };
