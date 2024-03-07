@@ -9,8 +9,8 @@ const urlRoute = require("./routes/url.route");
 const userRoute = require("./routes/user.route");
 const cookieParser = require("cookie-parser");
 const {
-  restrictToLoggedInUserOnly,
-  checkAuth,
+  checkForAuthentication,
+  restrictTo,
 } = require("./middlewares/user.auth.middleware.js");
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
@@ -21,14 +21,15 @@ connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-//dependencies
+//dependencies (middlewares)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 //routes
-app.use("/url", restrictToLoggedInUserOnly, urlRoute);
-app.use("/", checkAuth, staticRoute);
+app.use("/url", restrictTo(["NORMAL"]), urlRoute);
+app.use("/", staticRoute);
 app.use("/user", userRoute);
 
 app.get("/url/:shortID", async (req, res) => {
@@ -41,7 +42,7 @@ app.get("/url/:shortID", async (req, res) => {
       },
     }
   );
-  return res.redirect(entry.redirectURL);
+  return res.redirect(entry?.redirectURL);
 });
 
 app.listen(8001, () => {
