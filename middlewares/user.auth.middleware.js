@@ -14,7 +14,7 @@ const checkForAuthentication = (req, res, next) => {
 
 const restrictTo = (roles = []) => {
   return (req, res, next) => {
-    if (!req.user) return redirect("/login");
+    if (!req.user) return res.redirect("/login");
     if (!roles.includes(req?.user?.role)) return res.end("Unauthorized");
     return next();
   };

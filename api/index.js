@@ -1,19 +1,21 @@
 const express = require("express");
 const app = express();
-const URL = require("./models/url.model");
-const { connectToMongoDB } = require("./dbconnect");
+const URL = require("../models/url.model");
+const { connectToMongoDB } = require("../dbconnect");
 const ejs = require("ejs");
 const path = require("path");
-const staticRoute = require("./routes/static.route.js");
-const urlRoute = require("./routes/url.route");
-const userRoute = require("./routes/user.route");
+const staticRoute = require("../routes/static.route.js");
+const urlRoute = require("../routes/url.route");
+const userRoute = require("../routes/user.route");
+const dotenv = require("dotenv");
+dotenv.config();
 const cookieParser = require("cookie-parser");
 const {
   checkForAuthentication,
   restrictTo,
-} = require("./middlewares/user.auth.middleware.js");
+} = require("../middlewares/user.auth.middleware.js");
 
-connectToMongoDB("mongodb://127.0.0.1:27017/short-url")
+connectToMongoDB(process.env.MONGODBURL)
   .then(() => console.log(`MongoDB connected`))
   .catch((err) => console.log(err));
 
