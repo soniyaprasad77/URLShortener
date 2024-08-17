@@ -62,11 +62,16 @@
       button:hover {
         background-color: #45a049;
       }
+      a {
+        text-decoration: none;
+        color: #4caf50;
+      }
     </style>
   </head>
   <body>
     <h1>Sign Up</h1>
     <div id="container">
+      <p>Already have an account? <a href="/login">Login</a></p>
       <form method="POST" action="/user">
         <label>Full Name:</label>
         <input type="text" placeholder="Soniya Prasad" name="name" />

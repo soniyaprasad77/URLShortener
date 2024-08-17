@@ -67,11 +67,23 @@
         margin-top: 15px;
         color: #333;
       }
+      button > a {
+        text-decoration: none;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+      }
+      a {
+        text-decoration: none;
+        color: #4caf50;
+      }
     </style>
   </head>
   <body>
     <h1>Login</h1>
+
     <div id="container">
+      <p>Don't have an account? <a href="/signup">signup</a></p>
       <form method="POST" action="/user/login">
         <label>Email:</label>
         <input type="email" placeholder="abc@gmail.com" name="email" />
